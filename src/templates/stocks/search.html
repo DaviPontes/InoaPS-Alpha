@@ -1,0 +1,16 @@
+{% load static %}
+<div class="card-header">
+    <form action="" method="POST" id="search-form">
+        {% csrf_token %}
+        <div class="form-group row" style="padding-left: 1rem; padding-right: 1rem;">
+            <label for="search-field" class="col-3 col-form-label" style="padding-left: 0;">Search</label>
+            <div class="col-8">
+                <input type="search" class="form-control" id="search-field" placeholder="Stock">
+            </div>
+            <button type="submit" class="btn btn-outline-primary col-1 schema">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
+<div id="search-body" class="card-body p-0" style="overflow-y: auto;"></div>

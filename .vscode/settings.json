@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "bin/python",
+    "cSpell.words": [
+        "csrf",
+        "csrftoken"
+    ]
+}

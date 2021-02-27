@@ -1,7 +1,11 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from .forms import signUp_form
+
+from django.conf import settings
+from django.core.mail import send_mail
 
 def signUp_view(request):
     if request.user.is_authenticated:
@@ -19,3 +23,12 @@ def signUp_view(request):
     else:
         form = signUp_form()
     return render(request, 'registration/signup.html', {'form': form})
+
+def send_user_email(user_id, subject, message):
+    send_mail(
+        subject,
+        message,
+        settings.EMAIL_HOST_USER,
+        [User.objects.get(id=user_id).email],
+        fail_silently=False,
+    )

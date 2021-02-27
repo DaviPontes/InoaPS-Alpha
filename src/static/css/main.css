@@ -1,0 +1,46 @@
+h1{
+  color: red;
+}
+
+.navbar{
+  color: white;
+  background-color: #005984;
+
+  
+}
+
+.navbar, .user-container{
+  align-items: center;
+  color: white;   
+}
+
+.user-container, p{
+  margin-right: 1rem;
+  font-size: 1rem;
+}
+
+.user-container, a{
+  color: white;
+}
+
+.user-container, a:hover{
+  color: #bfbfbf;
+}
+
+.schema{
+  color: #005984 !important;
+  border-color: #005984 !important;
+}
+
+.schema:hover, .schema:active{
+  color: white !important;
+  background-color: #005984 !important;
+}
+
+.schema:focus, .schema:active{
+  box-shadow: 0 0 0 0.25rem rgb(0 89 132 / 50%) !important;
+}
+
+table#search-table tbody  tr {
+  cursor : pointer;
+}

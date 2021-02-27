@@ -3,6 +3,17 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>HOME</h1>
-    <p>Hi {{ user.username }}!</p>
+<div class="col-6">
+    <div class="card" style="height: calc(50% - 0.75rem);">
+        {% include 'stocks/search.html' %}
+    </div>
+    <div class="card" style="height: calc(50% - 0.75rem); margin-top: 1.5rem;">
+        {% include 'stocks/watch.html' %}
+    </div>
+</div>
+<div class="col-6">
+    <div class="card" style="height: 100%;">
+        {% include 'stocks/stock_view.html' %}
+    </div>
+</div>
 {% endblock %}
