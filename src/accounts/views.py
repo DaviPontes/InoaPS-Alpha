@@ -24,11 +24,11 @@ def signUp_view(request):
         form = signUp_form()
     return render(request, 'registration/signup.html', {'form': form})
 
-def send_user_email(user_id, subject, message):
+def send_user_email(email, subject, message):
     send_mail(
         subject,
         message,
         settings.EMAIL_HOST_USER,
-        [User.objects.get(id=user_id).email],
+        email,
         fail_silently=False,
     )

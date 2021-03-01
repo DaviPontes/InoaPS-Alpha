@@ -2,29 +2,32 @@ from django.core.management.base import BaseCommand, CommandError
 import kronos
 from background.views import search_stock, get_stock_log
 from stocks.models import Stock, Watch, Log
+from stocks.views import get_watched_stocks, get_stock, add_stock_log, check_watcher
+from datetime import datetime
+from alphaPS.settings import SCRIPT_TIMEOUT
 
-@kronos.register('* * * * *')
+
+@kronos.register(SCRIPT_TIMEOUT)
 class Command(BaseCommand):
     help = "B3 crawler"
 
-    def add_arguments(self, parser):
-        # Positional arguments
-        #parser.add_argument('poll_id', nargs='+', type=int)
-
-        # Named (optional) arguments
-        parser.add_argument(
-            '--setinterval',
-            help='Set interval for crawler',
-        )
-
     def handle(self, *args, **options):
         print("B3!")
-        objs = Watch.objects.filter(stock='pet')
-        for obj in objs:
-            print(obj.user.email)
+        print(datetime.now())
+        self.update_db()
         
-
-        if options['setinterval'] is not None:
-            print(f"Interval: {options['setinterval']}s")
+    
+    def update_db(self):
+        stocks = get_watched_stocks()
+        for stock in stocks:
+            log = get_stock_log(stock['symbol'])
+            add_stock_log(get_stock(stock['symbol']), log[0])
+        self.checker()
+    
+    def checker(self):
+        watchers = Watch.objects.all()
+        for watcher in watchers:
+            check_watcher(watcher)
+        
 
     

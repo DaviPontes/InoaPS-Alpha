@@ -136,10 +136,12 @@ STATICFILES_DIRS = [BASE_DIR.joinpath('static')]
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-KRONOS_POSTFIX = "> /tmp/b3.log"
+KRONOS_POSTFIX = ">> /tmp/b3.log"
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = secrets['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = secrets['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+SCRIPT_TIMEOUT = "0/1 * * * *"
