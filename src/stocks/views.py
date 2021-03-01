@@ -105,7 +105,6 @@ def update_watch_view(request, *args, **kwargs):
         watch_obj = Watch()
 
     if form['watch'] == 'true':
-        print(form)
         watch_obj.user = request.user
         watch_obj.stock = stock_obj
         watch_obj.price_buy = form['low']
@@ -119,7 +118,7 @@ def update_watch_view(request, *args, **kwargs):
 def get_stock_view(request, *args, **kwargs):
     symbol = request.POST['symbol']
     stock_obj = get_stock(symbol)
-    logs = get_stock_log(symbol, 50)
+    logs = get_stock_log(symbol, 20)
 
     try:
         watch_obj = Watch.objects.get(user=request.user, stock=stock_obj)

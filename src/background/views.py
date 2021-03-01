@@ -29,7 +29,7 @@ def get_stock_log(symbol, number=1):
     """
     response = []
     tk = yq.Ticker(symbol)
-    df = tk.history(period='1d', interval='1m').tail(5 + number)
+    df = tk.history(period='2d', interval='1m').tail(5 + number)
     df.index = (df.index.get_level_values('date') - (pd.Timestamp("1969-12-31 21:00:00"))) // pd.Timedelta("1ms")
     max_iter = 0
     for idx in reversed(df.index):

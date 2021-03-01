@@ -28,6 +28,3 @@ class Command(BaseCommand):
         watchers = Watch.objects.all()
         for watcher in watchers:
             check_watcher(watcher)
-        
-
-    

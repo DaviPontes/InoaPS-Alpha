@@ -1,7 +1,24 @@
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
-<a href="{% url 'signup' %}">Sign Up</a>
+{% extends 'registration/base.html' %}
+
+{% block content %}
+  
+  <h2 style="text-align: center;">Login</h2>
+
+  <form action="{% url 'login' %}"v method="post" style="display: flex; flex-direction: column;">
+    {% csrf_token %}
+    {% for field in form %}
+      <p class="mx-0">
+        {{ field.label_tag }}
+        <br>
+        {{ field }}
+        {% for error in field.errors %}
+          <p style="color: red !important">{{ error }}</p>
+        {% endfor %}
+        {{ field.errors }}
+      </p>
+    {% endfor %}
+    <button class="btn schema" type="submit">Login</button>
+    <br>
+    <a href="{% url 'signup' %}" style="color: black; text-align: center;">Sign Up</a>
+  </form>
+{% endblock %}
