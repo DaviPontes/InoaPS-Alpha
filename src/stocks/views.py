@@ -62,16 +62,21 @@ def add_stock_log(stock, log):
         stock.high = log['high']
         stock.save()
 
-def check_watcher(watcher):
+def check_watcher(watcher, status):
     print("Check")
     w_user = watcher.user
     w_stock = watcher.stock
     if w_stock.high > watcher.price_sell:
         print("Sell => ", w_user.email)
-        send_user_email([w_user.email], "Sell Stock", f'Stock price above the goal! Sell stock "{w_stock.symbol}".')
+        if status != "sell":
+            send_user_email([w_user.email], "Sell Stock", f'Stock price above the goal! Sell stock "{w_stock.symbol}".')
+        return "sell"
     elif w_stock.low < watcher.price_buy:
         print("Buy => ", w_user.email)
-        send_user_email([w_user.email], "Buy Stock", f'Stock price below the goal! Buy stock "{w_stock.symbol}".')
+        if status != "buy":
+            send_user_email([w_user.email], "Buy Stock", f'Stock price below the goal! Buy stock "{w_stock.symbol}".')
+        return "buy"
+    return None
 
 def search_view(request, *args, **kwargs):
     src = search_stock(request.POST['input'])
